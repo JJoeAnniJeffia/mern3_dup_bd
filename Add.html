@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        .form-group button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .recipe-list {
+            margin-top: 20px;
+        }
+        .recipe-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .recipe-item h2 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #333;
+        }
+        .recipe-item p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Recipe Manager</h1>
+        <div class="form-group">
+            <label for="recipe-name">Recipe Name</label>
+            <input type="text" id="recipe-name" placeholder="Enter recipe name">
+        </div>
+        <div class="form-group">
+            <label for="recipe-details">Recipe Details</label>
+            <textarea id="recipe-details" placeholder="Enter recipe details"></textarea>
+        </div>
+        <div class="form-group">
+            <button onclick="addRecipe()">Submit</button>
+        </div>
+        <div class="recipe-list" id="recipe-list">
+            <!-- Added recipes will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        function addRecipe() {
+            var recipeName = document.getElementById('recipe-name').value.trim();
+            var recipeDetails = document.getElementById('recipe-details').value.trim();
+
+            if (recipeName === '' || recipeDetails === '') {
+                alert('Please enter both recipe name and details.');
+                return;
+            }
+
+            var recipeList = document.getElementById('recipe-list');
+            var recipeItem = document.createElement('div');
+            recipeItem.className = 'recipe-item';
+
+            recipeItem.innerHTML = `
+                <h2>${recipeName}</h2>
+                <p>${recipeDetails}</p>
+            `;
+
+            recipeList.appendChild(recipeItem);
+
+            // Clear input fields
+            document.getElementById('recipe-name').value = '';
+            document.getElementById('recipe-details').value = '';
+        }
+    </script>
+</body>
+</html>

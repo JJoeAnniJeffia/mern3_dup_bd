@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .chat-container {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 10px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background: #fafafa;
+            border-radius: 5px;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .user-message {
+            text-align: right;
+            color: #007bff;
+        }
+        .bot-message {
+            text-align: left;
+            color: #333;
+        }
+        .input-box {
+            display: flex;
+            margin-top: 10px;
+        }
+        .input-box input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .input-box button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .input-box button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+        <div class="input-box">
+            <input type="text" id="user-input" placeholder="Type a recipe name...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var input = document.getElementById('user-input');
+            var chatBox = document.getElementById('chat-box');
+            var userMessage = input.value.trim().toLowerCase();
+            
+            if (userMessage === '') {
+                return;
+            }
+
+            // Display user message
+            chatBox.innerHTML += '<div class="message user-message">' + input.value + '</div>';
+            
+            // Clear input box
+            input.value = '';
+
+            // Display bot response
+            var botResponse = '';
+
+            switch (userMessage) {
+                case 'dosa':
+                    botResponse = `
+                        <div class="message bot-message">
+                            <h3>Dosa Recipe</h3>
+                            <p><strong>Ingredients:</strong></p>
+                            <ul>
+                                <li>1 cup rice</li>
+                                <li>1/2 cup urad dal (split black gram)</li>
+                                <li>1/4 cup chana dal (split chickpeas)</li>
+                                <li>1/2 tsp fenugreek seeds</li>
+                                <li>Salt to taste</li>
+                                <li>Oil for cooking</li>
+                            </ul>
+                            <p><strong>Instructions:</strong></p>
+                            <ol>
+                                <li>Soak rice, urad dal, chana dal, and fenugreek seeds in water for at least 4 hours.</li>
+                                <li>Drain the water and grind the soaked ingredients to a smooth batter. Add water as needed.</li>
+                                <li>Allow the batter to ferment overnight or for 8-12 hours.</li>
+                                <li>Heat a non-stick pan or griddle. Pour a ladle of batter and spread it into a thin circle.</li>
+                                <li>Cook until the edges lift and the bottom turns golden brown. Flip and cook the other side for a minute.</li>
+                                <li>Serve hot with chutney and sambar.</li>
+                            </ol>
+                        </div>`;
+                    break;
+                case 'idly':
+                    botResponse = `
+                        <div class="message bot-message">
+                            <h3>Idly Recipe</h3>
+                            <p><strong>Ingredients:</strong></p>
+                            <ul>
+                                <li>1 cup rice</li>
+                                <li>1/2 cup urad dal (split black gram)</li>
+                                <li>1/2 tsp fenugreek seeds</li>
+                                <li>Salt to taste</li>
+                                <li>Water as needed</li>
+                            </ul>
+                            <p><strong>Instructions:</strong></p>
+                            <ol>
+                                <li>Soak rice, urad dal, and fenugreek seeds in water for at least 4 hours.</li>
+                                <li>Drain the water and grind the soaked ingredients to a smooth batter. Add water as needed.</li>
+                                <li>Allow the batter to ferment overnight or for 8-12 hours.</li>
+                                <li>Pour the batter into idly molds and steam for 10-12 minutes.</li>
+                                <li>Remove the idlies from the molds and serve hot with chutney and sambar.</li>
+                            </ol>
+                        </div>`;
+                    break;
+                case 'vada':
+                    botResponse = `
+                        <div class="message bot-message">
+                            <h3>Vada Recipe</h3>
+                            <p><strong>Ingredients:</strong></p>
+                            <ul>
+                                <li>1 cup urad dal (split black gram)</li>
+                                <li>1 small onion, finely chopped</li>
+                                <li>2 green chilies, finely chopped</li>
+                                <li>1 tsp ginger, finely chopped</li>
+                                <li>1/4 cup chopped coriander leaves</li>
+                                <li>1/4 tsp cumin seeds</li>
+                                <li>Salt to taste</li>
+                                <li>Oil for deep frying</li>
+                            </ul>
+                            <p><strong>Instructions:</strong></p>
+                            <ol>
+                                <li>Soak urad dal in water for 4 hours. Drain and grind to a smooth batter without adding water.</li>
+                                <li>Add onions, green chilies, ginger, coriander leaves, cumin seeds, and salt to the batter. Mix well.</li>
+                                <li>Heat oil in a deep frying pan. Take a small portion of the batter and shape it into a donut.</li>
+                                <li>Carefully drop it into the hot oil and fry until golden brown and crispy. Drain on paper towels.</li>
+                                <li>Serve hot with coconut chutney and sambar.</li>
+                            </ol>
+                        </div>`;
+                    break;
+                    case 'halwa':
+                    botResponse = `
+                        <div class="message bot-message">
+                            <h3>Vada Recipe</h3>
+                            <p><strong>Ingredients:</strong></p>
+                            <ul>
+                                <li>1 cup urad dal (split black gram)</li>
+                                <li>1 small onion, finely chopped</li>
+                                <li>2 green chilies, finely chopped</li>
+                                <li>1 tsp ginger, finely chopped</li>
+                                <li>1/4 cup chopped coriander leaves</li>
+                                <li>1/4 tsp cumin seeds</li>
+                                <li>Salt to taste</li>
+                                <li>Oil for deep frying</li>
+                            </ul>
+                            <p><strong>Instructions:</strong></p>
+                            <ol>
+                                <li>Soak urad dal in water for 4 hours. Drain and grind to a smooth batter without adding water.</li>
+                                <li>Add onions, green chilies, ginger, coriander leaves, cumin seeds, and salt to the batter. Mix well.</li>
+                                <li>Heat oil in a deep frying pan. Take a small portion of the batter and shape it into a donut.</li>
+                                <li>Carefully drop it into the hot oil and fry until golden brown and crispy. Drain on paper towels.</li>
+                                <li>Serve hot with coconut chutney and sambar.</li>
+                            </ol>
+                        </div>`;
+                    break;
+                    case 'fish-curry':
+                    botResponse = `
+                        <div class="message bot-message">
+                            <h3>Vada Recipe</h3>
+                            <p><strong>Ingredients:</strong></p>
+                            <ul>
+                                <li>1 cup urad dal (split black gram)</li>
+                                <li>1 small onion, finely chopped</li>
+                                <li>2 green chilies, finely chopped</li>
+                                <li>1 tsp ginger, finely chopped</li>
+                                <li>1/4 cup chopped coriander leaves</li>
+                                <li>1/4 tsp cumin seeds</li>
+                                <li>Salt to taste</li>
+                                <li>Oil for deep frying</li>
+                            </ul>
+                            <p><strong>Instructions:</strong></p>
+                            <ol>
+                                <li>Soak urad dal in water for 4 hours. Drain and grind to a smooth batter without adding water.</li>
+                                <li>Add onions, green chilies, ginger, coriander leaves, cumin seeds, and salt to the batter. Mix well.</li>
+                                <li>Heat oil in a deep frying pan. Take a small portion of the batter and shape it into a donut.</li>
+                                <li>Carefully drop it into the hot oil and fry until golden brown and crispy. Drain on paper towels.</li>
+                                <li>Serve hot with coconut chutney and sambar.</li>
+                            </ol>
+                        </div>`;
+                    break;
+                    case 'fishfry':
+                    botResponse = `
+                        <div class="message bot-message">
+                            <h3>Vada Recipe</h3>
+                            <p><strong>Ingredients:</strong></p>
+                            <ul>
+                                <li>1 cup urad dal (split black gram)</li>
+                                <li>1 small onion, finely chopped</li>
+                                <li>2 green chilies, finely chopped</li>
+                                <li>1 tsp ginger, finely chopped</li>
+                                <li>1/4 cup chopped coriander leaves</li>
+                                <li>1/4 tsp cumin seeds</li>
+                                <li>Salt to taste</li>
+                                <li>Oil for deep frying</li>
+                            </ul>
+                            <p><strong>Instructions:</strong></p>
+                            <ol>
+                                <li>Soak urad dal in water for 4 hours. Drain and grind to a smooth batter without adding water.</li>
+                                <li>Add onions, green chilies, ginger, coriander leaves, cumin seeds, and salt to the batter. Mix well.</li>
+                                <li>Heat oil in a deep frying pan. Take a small portion of the batter and shape it into a donut.</li>
+                                <li>Carefully drop it into the hot oil and fry until golden brown and crispy. Drain on paper towels.</li>
+                                <li>Serve hot with coconut chutney and sambar.</li>
+                            </ol>
+                        </div>`;
+                    break;
+                    case 'biryani':
+                    botResponse = `
+                        <div class="message bot-message">
+                            <h3>Vada Recipe</h3>
+                            <p><strong>Ingredients:</strong></p>
+                            <ul>
+                                <li>1 cup urad dal (split black gram)</li>
+                                <li>1 small onion, finely chopped</li>
+                                <li>2 green chilies, finely chopped</li>
+                                <li>1 tsp ginger, finely chopped</li>
+                                <li>1/4 cup chopped coriander leaves</li>
+                                <li>1/4 tsp cumin seeds</li>
+                                <li>Salt to taste</li>
+                                <li>Oil for deep frying</li>
+                            </ul>
+                            <p><strong>Instructions:</strong></p>
+                            <ol>
+                                <li>Soak urad dal in water for 4 hours. Drain and grind to a smooth batter without adding water.</li>
+                                <li>Add onions, green chilies, ginger, coriander leaves, cumin seeds, and salt to the batter. Mix well.</li>
+                                <li>Heat oil in a deep frying pan. Take a small portion of the batter and shape it into a donut.</li>
+                                <li>Carefully drop it into the hot oil and fry until golden brown and crispy. Drain on paper towels.</li>
+                                <li>Serve hot with coconut chutney and sambar.</li>
+                            </ol>
+                        </div>`;
+                    break;
+                
+                default:
+                    botResponse = '<div class="message bot-message">Sorry, I do not have a recipe for that dish. Please type South Indian Cuisine.</div>';
+            }
+
+            chatBox.innerHTML += botResponse;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
